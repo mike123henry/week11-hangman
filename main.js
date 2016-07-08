@@ -1,8 +1,7 @@
 var prompt = require('prompt');
 var Word = require('./word.js');
-var Game = require('./game.js');
+var gameFile = require('./game.js');
 
-console.log('Game = '+Game.game.wordBank)
 prompt.start();
 
 game = {
@@ -15,7 +14,7 @@ game = {
 		this.resetGuessesRemaining();
 
 		//get a random word from the array
-		this.currentWrd = new Word.Word(Game.game.wordBank[Math.floor(Math.random()* Game.game.wordBank.length)]);
+		this.currentWrd = new Word.Word(gameFile.wordsForGames.wordBank[Math.floor(Math.random()* gameFile.wordsForGames.wordBank.length)]);
 
 		this.currentWrd.getLets(); //populate currentWrd (made from Word constructor function) object with letters
 
@@ -30,8 +29,6 @@ game = {
 
 		prompt.get(['guessLetter'], function(err, result) {
 		    // result is an object like this: { guessLetter: 'f' }
-		    console.log(result);
-
 		    console.log('  The letter or space you guessed is: ' + result.guessLetter);
 
 		    //this checks if the letter was found and if it is then it sets that specific letter in the word to be found

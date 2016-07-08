@@ -1,18 +1,16 @@
- function Letter(let) {
-    console.log('let = '+let);
-    //make a charac property and set it to what you think makes sense
-    this.charac = let;
+ function Letter(letterPassedIntoFunction) {
+    //make a character property and set it to what you think makes sense
+    this.character = letterPassedIntoFunction;
 
     //make an appear property and set it to what makes sense
     this.appear = false;
 
-    //make a letterRender property and set it to a function that does what you think makes sense
-    this.letterRender = function(){
-        console.log('letterRender is running');
+    //make a chooseCharacterToDisplay property and set it to a function that does what you think makes sense
+    this.chooseCharacterToDisplay = function(){
         if (this.appear === true){
-            return this.charac;
+            return this.character;
         }else{
-            return "_"
+            return " _ "
         }
     }
 };
