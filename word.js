@@ -20,7 +20,6 @@ var Word = function(wordForThisGamePassedIntoFunction){
 	this.getLets = function(){
 		for (var i = 0; i <this.word.length; i++) {
 			this.letterObjectArray.push(new letter.Letter(this.word[i]));
-			console.log('for getLets this.letterObjectArray = '+this.letterObjectArray[i].character);
 		}
 	}
 	//returns ture or false whether we found the current word or not
@@ -46,6 +45,7 @@ var Word = function(wordForThisGamePassedIntoFunction){
 		console.log('checkIfLetterFound guessLetter = '+guessLetter);
 		//set a variable numberofLettersMarchedToReturn to 0
 		var numberofLettersMarchedToReturn = 0;
+
 		//loop over the letterObjectArray property and if the letter object's character property equals the guessletter then
             //set the appear property of the letter object to be true. Also increment numberofLettersMarchedToReturn.
         for (var i = 0; i < this.letterObjectArray.length; i++) {
@@ -74,3 +74,4 @@ var Word = function(wordForThisGamePassedIntoFunction){
 
 //export the Word constructor here at the end
 exports.Word = Word;
+
