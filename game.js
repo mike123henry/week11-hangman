@@ -1,10 +1,4 @@
-//   * The application should select a random word from the `game.js`
-exports.gameWord={[
-    'The',
-    'application',
-     'should',
-      'select',
-      'random',
-      'word',
-      'from',
-      'game']};
+exports.game = {
+	//this.wordChoices = ["heart and soul", "relax", "burning up", "manic monday", "into the groove", "invisible touch", "rebel yell"];
+	wordBank : ["relax"]
+};
