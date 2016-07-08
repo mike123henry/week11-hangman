@@ -15,7 +15,7 @@ game = {
 		//get a random word from the array
 		this.currentWrd = new Word.Word(gameFile.wordsForGames.wordBank[Math.floor(Math.random()* gameFile.wordsForGames.wordBank.length)]);
 
-		this.currentWrd.getLets(); //populate currentWrd (made from Word constructor function) object with letters
+		this.currentWrd.populateLetterObjectArray(); //populate currentWrd (made from Word constructor function) object with letters
 
 		this.keepPromptingUser();
 
@@ -27,6 +27,15 @@ game = {
 		var self = this;
 
 		prompt.get(['guessLetter'], function(err, result) {
+			//trap for repeat letters ad more then one character entered
+			if (result.guessLetter.length>1 || self.lettersAlreadyGuessed.includes(result.guessLetter)) {
+				console.log('\nUSER ERROR!!!\n');
+				console.log('Please enter one letter only and only a letter that has not been used already');
+				console.log('  The letter or space you guessed is: ' + result.guessLetter);
+				console.log('Letters already guessed are '+self.lettersAlreadyGuessed);
+				self.keepPromptingUser();
+			}else{
+
 		    // result is an object like this: { guessLetter: 'f' }
 		    console.log('  The letter or space you guessed is: ' + result.guessLetter);
 
@@ -62,7 +71,9 @@ game = {
 		    }else{
 		    	console.log(self.currentWrd.wordRender());
 		    }
+		}
 		});
+
 	}
 
 

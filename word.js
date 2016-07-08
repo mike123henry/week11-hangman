@@ -1,4 +1,4 @@
-var letter = require('./letter.js')
+var letter = require('./letter.js');
 //import Letter above with requiring the letter.js file
 
 var Word = function(wordForThisGamePassedIntoFunction){
@@ -15,9 +15,9 @@ var Word = function(wordForThisGamePassedIntoFunction){
 	//mlh initalize to false and get set to true in function below
 	this.found = false;
 
-	//make a property called getLets, set it to a function and inside the function loop over the word property and
+	//make a property called populateLetterObjectArray, set it to a function and inside the function loop over the word property and
         //push letter objects into the letterObjectArray property.
-	this.getLets = function(){
+	this.populateLetterObjectArray = function(){
 		for (var i = 0; i <this.word.length; i++) {
 			this.letterObjectArray.push(new letter.Letter(this.word[i]));
 		}
