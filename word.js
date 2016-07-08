@@ -2,9 +2,8 @@ var letter = require('./letter.js');
 //import Letter above with requiring the letter.js file
 
 var Word = function(wordForThisGamePassedIntoFunction){
-	console.log('wordForThisGamePassedIntoFunction = '+wordForThisGamePassedIntoFunction);
+
 	//set a property called word and set it equal to what you think it should be
-	//mlh take the function input wrd and split it into an array of letters
 	this.word = wordForThisGamePassedIntoFunction;
 
 	//set a property called letterObjectArray to an empty array. We will eventually push letter objects in here

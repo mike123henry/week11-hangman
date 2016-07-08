@@ -1,6 +1,9 @@
 var prompt = require('prompt');
 var Word = require('./word.js');
 var gameFile = require('./game.js');
+var cheaterCheater = process.argv[2];
+
+console.log("See README.md for cheaterCheater code!! :)")
 prompt.start();
 
 game = {
@@ -14,7 +17,9 @@ game = {
 		this.lettersAlreadyGuessed = "";
 		//get a random word from the array
 		this.currentWrd = new Word.Word(gameFile.wordsForGames.wordBank[Math.floor(Math.random()* gameFile.wordsForGames.wordBank.length)]);
-
+		if(cheaterCheater === "teacher"){
+			console.log("The current word = "+this.currentWrd.word);
+		}
 		this.currentWrd.populateLetterObjectArray(); //populate currentWrd (made from Word constructor function) object with letters
 
 		this.keepPromptingUser();
