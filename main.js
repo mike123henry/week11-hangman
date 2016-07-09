@@ -1,7 +1,9 @@
 var prompt = require('prompt');
+var clear = require('clear');
 var Word = require('./word.js');
 var gameFile = require('./game.js');
 var cheaterCheater = process.argv[2];
+
 
 console.log("See README.md for cheaterCheater code!! :)")
 prompt.start();
@@ -16,7 +18,7 @@ game = {
 		this.resetGuessesRemaining();
 		this.lettersAlreadyGuessed = "";
 		//get a random word from the array
-		this.currentWrd = new Word.Word(gameFile.wordsForGames.wordBank[Math.floor(Math.random()* gameFile.wordsForGames.wordBank.length)]);
+		this.currentWrd = new Word.Word(gameFile.wordsForGames.wordBank[Math.floor(Math.random()* gameFile.wordsForGames.wordBank.length)].toUpperCase());
 		if(cheaterCheater === "teacher"){
 			console.log("The current word = "+this.currentWrd.word);
 		}
@@ -32,21 +34,27 @@ game = {
 		var self = this;
 
 		prompt.get(['guessLetter'], function(err, result) {
+			clear();
+			var promptInputEntered = result.guessLetter.toUpperCase();
 			//trap for repeat letters ad more then one character entered
-			if (result.guessLetter.length>1 || self.lettersAlreadyGuessed.includes(result.guessLetter)) {
+			if (result.guessLetter.length>1 || self.lettersAlreadyGuessed.includes(promptInputEntered) || /[^A-Z]/.test(promptInputEntered)) {
 				console.log('\nUSER ERROR!!!\n');
 				console.log('Please enter one letter only and only a letter that has not been used already');
-				console.log('  The letter or space you guessed is: ' + result.guessLetter);
+				console.log('The letter or space you guessed is: ' + promptInputEntered);
 				console.log('Letters already guessed are '+self.lettersAlreadyGuessed);
+			    console.log('\n\nGuesses remaining: ', self.guessesRemaining);
+		    	console.log(self.currentWrd.wordRender());
+		    	console.log('here are the letters you guessed already: ');
+		    	console.log(self.lettersAlreadyGuessed);
 				self.keepPromptingUser();
 			}else{
 
 		    // result is an object like this: { guessLetter: 'f' }
-		    console.log('  The letter or space you guessed is: ' + result.guessLetter);
+		    console.log('The letter or space you guessed is: ' + promptInputEntered);
 
-		    self.lettersAlreadyGuessed += result.guessLetter;
+		    self.lettersAlreadyGuessed += promptInputEntered;
 		    //this checks if the letter was found and if it is then it sets that specific letter in the word to be found
-		    var howManyLettersInWordMatched = self.currentWrd.checkIfLetterFound(result.guessLetter);
+		    var howManyLettersInWordMatched = self.currentWrd.checkIfLetterFound(promptInputEntered);
 
 		    //if the user guessed incorrectly minus the number of guesses they have left
 		    if (howManyLettersInWordMatched == 0){
@@ -57,6 +65,7 @@ game = {
 
 		    	//check if you win only when you are right
 	    		if(self.currentWrd.didWeFindTheWord()){
+	    			console.log(self.currentWrd.wordRender());
 			    	console.log('You Won!!!');
 			    	return; //end game
 			    }
@@ -71,6 +80,7 @@ game = {
 		    	self.keepPromptingUser();
 		    }
 		    else if(self.guessesRemaining == 0){
+		    	clear();
 		    	console.log('Game over bro it was ', self.currentWrd.word);
 		    	console.log('Get with the program man');
 		    }else{
